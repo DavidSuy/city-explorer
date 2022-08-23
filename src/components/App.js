@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/App.css";
 import Form from "react-bootstrap/Form";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Alert } from "react-bootstrap";
 import axios from "axios";
 
 class App extends React.Component {
@@ -16,14 +16,21 @@ class App extends React.Component {
 
   handleCitySubmit = async (e) => {
     e.preventDefault();
-    let cityResponse = await axios.get(
-      `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`
-    );
+    try {
+      let cityResponse = await axios.get(
+        `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`
+      );
 
-    this.setState({
-      cityData: cityResponse.data[0],
-      map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${cityResponse.data[0].lat},${cityResponse.data[0].lon}&zoom=12`,
-    });
+      this.setState({
+        cityData: cityResponse.data[0],
+        map: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${cityResponse.data[0].lat},${cityResponse.data[0].lon}&zoom=12`,
+      });
+    } catch (error) {
+      this.setState({
+        error: error.message,
+      });
+      console.log(error);
+    }
   };
 
   handleCityInput = (e) => {
@@ -33,7 +40,6 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.map);
     return (
       <>
         <Form onSubmit={this.handleCitySubmit}>
@@ -60,6 +66,11 @@ class App extends React.Component {
           </Card>
         ) : (
           <></>
+        )}
+        {this.state.error ? (
+          <Alert variant="danger">{this.state.error}</Alert>
+        ) : (
+          ""
         )}
       </>
     );
