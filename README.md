@@ -1,7 +1,7 @@
 # City Explorer
 
 **Author**: David Suy
-**Version**: 1.0.0 
+**Version**: 1.0.0
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
@@ -24,12 +24,12 @@
 
 ## Time Estimates
 
-Name of feature: ________________________________
+Name of feature: add locationIQ
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 2 hours
 
-Start time: _____
+Start time: 1400
 
-Finish time: _____
+Finish time: 1800
 
-Actual time needed to complete: _____
+Actual time needed to complete: 4 hours
