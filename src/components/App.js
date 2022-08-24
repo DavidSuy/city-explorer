@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/App.css";
 import Form from "react-bootstrap/Form";
-import { Button, Card, Alert } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import Weather from "./Weather";
 import Map from "../components/Map";
