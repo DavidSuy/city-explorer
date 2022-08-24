@@ -33,3 +33,20 @@ Start time: 1400
 Finish time: 1800
 
 Actual time needed to complete: 4 hours
+
+![WRC](./public/img/wrc01.jpg)
+------------
+
+Name of feature: add weather
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 1400
+
+Finish time: 0100
+
+Actual time needed to complete: 11 hours
+
+![WRC](./public/img/wrc02.jpg)
+
+
