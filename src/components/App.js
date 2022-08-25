@@ -5,6 +5,7 @@ import { Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import Weather from "./Weather";
 import Map from "../components/Map";
+import Movie from "./Movie";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends React.Component {
       cityData: {},
       url: "",
       weather: [],
+      movieArr: [],
     };
   }
 
@@ -27,14 +29,23 @@ class App extends React.Component {
       let cityUrl = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`;
       let cityResponse = await axios.get(cityUrl);
 
-      let weatherUrl = `${process.env.REACT_APP_BASE_URL}/weather?lat=${cityResponse.data[0].lat}&lon=${cityResponse.data[0].lon}&searchQuery=${cityResponse.data[0].display_name}`;
+      let searchQuery = cityResponse.data[0].display_name
+        .split(" ")[0]
+        .slice(0, -1);
+
+      let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?lat=${cityResponse.data[0].lat}&lon=${cityResponse.data[0].lon}&searchQuery=${searchQuery}`;
       let weatherResponse = await axios.get(weatherUrl);
 
       let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${cityResponse.data[0].lat},${cityResponse.data[0].lon}&zoom=12`;
+
+      let movieUrl = `${process.env.REACT_APP_SERVER}/movie?searchQuery=${searchQuery}`;
+      let movieResponse = await axios.get(movieUrl);
+
       this.setState({
         cityData: cityResponse.data[0],
         url: mapUrl,
         weather: weatherResponse.data,
+        movieArr: movieResponse.data,
         error: {
           errorState: false,
         },
@@ -57,10 +68,11 @@ class App extends React.Component {
   };
 
   render() {
+    // console.log(this.state);
     return (
       <>
         <h1>City Explorer</h1>
-        {this.state.error.errorState === true ? (
+        {this.state.error.errorState ? (
           <Alert variant="danger">{this.state.error.errorMessage}</Alert>
         ) : (
           ""
@@ -83,10 +95,11 @@ class App extends React.Component {
             <Map
               name={this.state.cityData.display_name}
               url={this.state.url}
-              lat={`Lat: ${this.state.cityData.lat}`}
-              lon={`Lat: ${this.state.cityData.lon}`}
+              lat={this.state.cityData.lat}
+              lon={this.state.cityData.lon}
             />
             <Weather weather={this.state.weather} />
+            <Movie movieArr={this.state.movieArr} />
           </>
         ) : (
           <></>
