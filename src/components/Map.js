@@ -10,7 +10,7 @@ class Map extends React.Component {
             <Card.Title>{this.props.name}</Card.Title>
             <Card.Img src={this.props.url} />
             <Card.Text>{`Lat: ${this.props.lat}`}</Card.Text>
-            <Card.Text>{`Lat: ${this.props.lon}`}</Card.Text>
+            <Card.Text>{`Lon: ${this.props.lon}`}</Card.Text>
           </Card.Body>
         </Card>
       </>
