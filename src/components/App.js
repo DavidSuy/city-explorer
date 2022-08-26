@@ -5,7 +5,7 @@ import { Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import Weather from "./Weather";
 import Map from "../components/Map";
-import Movie from "./Movie";
+import Movies from "./Movies";
 
 class App extends React.Component {
   constructor(props) {
@@ -99,7 +99,7 @@ class App extends React.Component {
               lon={this.state.cityData.lon}
             />
             <Weather weather={this.state.weather} />
-            <Movie movieArr={this.state.movieArr} />
+            <Movies movieArr={this.state.movieArr} />
           </>
         ) : (
           <></>
