@@ -1,17 +1,11 @@
 import React from "react";
 import { Table } from "react-bootstrap";
+import WeatherDay from "./WeatherDay";
 
 class Weather extends React.Component {
   render() {
     let weatherArr = this.props.weather.map((weatherDay, idx) => {
-      return (
-        <tr key={idx}>
-          <td>{weatherDay.date}</td>
-          <td>{weatherDay.low}</td>
-          <td>{weatherDay.high}</td>
-          <td>{weatherDay.description}</td>
-        </tr>
-      );
+      return <WeatherDay weatherDay={weatherDay} key={idx} />;
     });
 
     return (
